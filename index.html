@@ -1,0 +1,1116 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azra Halı Yıkama</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #32353d;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            background-color: #b3c53a;
+            color: white;
+            padding: 0.5rem 0;
+            font-size: 0.875rem;
+        }
+
+        .top-bar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-bar-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .top-bar-links a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .top-bar-links a:hover {
+            opacity: 0.8;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            padding: 1rem 0;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .logo {
+            font-size: 1.875rem;
+            font-weight: bold;
+        }
+
+        .logo-zumrut {
+            color: #35a9d9;
+        }
+
+        .logo-hali {
+            color: #b3c53a;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .contact-icon {
+            color: #35a9d9;
+            width: 32px;
+            height: 32px;
+        }
+
+        .contact-label {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .contact-number {
+            font-weight: 600;
+        }
+
+        /* Navigation */
+        nav {
+            border-top: 1px solid #e5e7eb;
+            padding-top: 0.75rem;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #32353d;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: #b3c53a;
+        }
+
+        /* Hero Slider */
+        .hero-slider {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 1s;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.3);
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            color: white;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .slide-text {
+            max-width: 42rem;
+        }
+
+        .slide-title {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .slide-subtitle {
+            font-size: 1.125rem;
+            color: #fde047;
+        }
+
+        .circular-images {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 20;
+        }
+
+        .circular-image {
+            width: 8rem;
+            height: 8rem;
+            border-radius: 50%;
+            border: 4px solid #b3c53a;
+            overflow: hidden;
+            background: white;
+        }
+
+        .circular-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 30;
+            background: rgba(255,255,255,0.8);
+            padding: 0.5rem;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slider-btn:hover {
+            background: white;
+        }
+
+        .slider-btn.prev {
+            left: 1rem;
+        }
+
+        .slider-btn.next {
+            right: 1rem;
+        }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+            z-index: 30;
+        }
+
+        .dot {
+            width: 0.75rem;
+            height: 0.75rem;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.6);
+            border: none;
+            cursor: pointer;
+        }
+
+        .dot.active {
+            background: #b3c53a;
+        }
+
+        /* Sections */
+        .section {
+            padding: 4rem 0;
+        }
+
+        .section-gray {
+            background: #f9fafb;
+        }
+
+        .section-green {
+            background: #b3c53a;
+        }
+
+        .section-dark {
+            background: #32353d;
+            color: white;
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 0.75rem;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: box-shadow 0.3s;
+        }
+
+        .card:hover {
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-icon {
+            width: 4rem;
+            height: 4rem;
+            background: #35a9d9;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .card-icon svg {
+            width: 2rem;
+            height: 2rem;
+            fill: white;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-text {
+            color: #6b7280;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 12rem;
+            object-fit: cover;
+        }
+
+        .service-card .card-content {
+            text-align: center;
+        }
+
+        .service-card .card-title {
+            margin-bottom: 0.75rem;
+        }
+
+        .service-card .card-text {
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Button */
+        .btn {
+            background: #35a9d9;
+            color: white;
+            padding: 0.5rem 2rem;
+            border: none;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background: #2a8ab8;
+        }
+
+        /* Section Title */
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: white;
+            max-width: 56rem;
+            margin: 0 auto 3rem;
+        }
+
+        .section-subtitle-dark {
+            color: #6b7280;
+        }
+
+        /* Image Grid */
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .image-grid-item {
+            overflow: hidden;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .image-grid-item img {
+            width: 100%;
+            height: 12rem;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .image-grid-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Statistics */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            text-align: center;
+            color: white;
+        }
+
+        .stat-icon {
+            width: 3rem;
+            height: 3rem;
+            margin: 0 auto 1rem;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.125rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .footer-text {
+            color: #9ca3af;
+            font-size: 0.875rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 0.875rem;
+        }
+
+        .footer-links a:hover {
+            color: #b3c53a;
+        }
+
+        .footer-contact {
+            color: #9ca3af;
+            font-size: 0.875rem;
+        }
+
+        .footer-contact p {
+            margin-bottom: 0.5rem;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .social-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            background: #4a4d56;
+            border-radius: 0.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            background: #b3c53a;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #4b5563;
+            padding-top: 2rem;
+            text-align: center;
+            color: #9ca3af;
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-top {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .slide-title {
+                font-size: 2rem;
+            }
+
+            .circular-images {
+                gap: 0.5rem;
+            }
+
+            .circular-image {
+                width: 5rem;
+                height: 5rem;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 1.875rem;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <div>Azra Halı Yıkama</div>
+                <div class="top-bar-links">
+                    <a href="https://www.facebook.com/people/Azra-Hal%C4%B1-Y%C4%B1kama-Boyabat/100064742890926/" target="_blank">Facebook</a>
+                    <a href="https://www.instagram.com/azrahaliyikama57/" target="_blank">Instagram</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="header-top">
+                    <div class="logo">
+                        <span class="logo-zumrut">Azra</span> <span class="logo-hali">Halı Yıkama</span>
+                    </div>
+
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <svg class="contact-icon" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+                            </svg>
+                            <div>
+                                <div class="contact-label">Telefon</div>
+                                <div class="contact-number">0368 315 46 86</div>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <svg class="contact-icon" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd"/>
+                            </svg>
+                            <div>
+                                <div class="contact-label">Whatsapp</div>
+                                <div class="contact-number">0368 315 46 86</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <nav>
+                    <ul>
+                        <li><a href="#">ANA SAYFA</a></li>
+                        <li><a href="#about">FİRMAMIZ HAKKINDA</a></li>
+                        <li><a href="#services">HİZMETLERİMİZ</a></li>
+                        <li><a href="#sube">HİZMET BÖLGELERİMİZ</a>
+                        <li><a href="galeri.html">GALERİ</a></li>
+                        <li><a href="#location">KONUM</a></li>
+                        <li><a href="#contact">İLETİŞİM</a></li>
+                        <li><a href="#order" style="background:#28a745; color:white; padding:10px 16px; border-radius:6px;">SİPARİŞ VER</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Slider -->
+    <section class="hero-slider">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1540574163026-643ea20ade25?w=1600&h=500&fit=crop')">
+            <div class="slide-overlay"></div>
+            <div class="slide-content">
+                <div class="slide-text">
+                    <h1 class="slide-title">YERİNDE KOLTUK YIKAMA</h1>
+                    <p class="slide-subtitle">KOLTUKLARINIZ YÜKSEK EMİŞ GÜCÜNE SAHİP MAKİNALARLA ÖZEL SOLÜSYONLAR KULLANILARAK UZMAN PERSONELİMİZ TARAFINDAN YERİNDE YIKANIR</p>
+                </div>
+            </div>
+            <div class="circular-images">
+                <div class="circular-image">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200&h=200&fit=crop" alt="Service 1">
+                </div>
+                <div class="circular-image">
+                    <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?w=200&h=200&fit=crop" alt="Service 2">
+                </div>
+                <div class="circular-image">
+                    <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=200&h=200&fit=crop" alt="Service 3">
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1540574163026-643ea20ade25?w=1600&h=500&fit=crop')">
+            <div class="slide-overlay"></div>
+            <div class="slide-content">
+                <div class="slide-text">
+                    <h1 class="slide-title">BİZ GÜZEl TEMİZLİYORUZ</h1>
+                    <p class="slide-subtitle">PROFESYONEl EKİPMAN VE UZMAN KADROMUZLA HİZMETİNİZDEYİZ</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1540574163026-643ea20ade25?w=1600&h=500&fit=crop')">
+            <div class="slide-overlay"></div>
+            <div class="slide-content">
+                <div class="slide-text">
+                    <h1 class="slide-title">ÜCRETSİZ SERVİS HIZLI TESLİMAT</h1>
+                    <p class="slide-subtitle">TÜM HİZMETLERİMİZDE ÜCRETSİZ SERVİS VE HIZLI TESLİMAT GARANTİSİ</p>
+                </div>
+            </div>
+        </div>
+
+        <button class="slider-btn prev" onclick="prevSlide()">
+            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+            </svg>
+        </button>
+        <button class="slider-btn next" onclick="nextSlide()">
+            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+        </button>
+
+        <div class="slider-dots">
+            <button class="dot active" onclick="goToSlide(0)"></button>
+            <button class="dot" onclick="goToSlide(1)"></button>
+            <button class="dot" onclick="goToSlide(2)"></button>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section section-gray">
+        <div class="container">
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 20 20">
+                                <path d="M10 2a8 8 0 100 16 8 8 0 000-16zM8 11a1 1 0 112 0 1 1 0 01-2 0zm2-3a1 1 0 100-2 1 1 0 000 2z"/>
+                            </svg>
+                        </div>
+                        <h3 class="card-title">Antibakteriyel Temizlik</h3>
+                        <p class="card-text">Kirlenen halılarda halı akarı denilen ve sağlığa zararlı mikroplar barınır. Fabrikamızda halılarınız tüm mikroplardan arındırılmaktadır.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 20 20">
+                                <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6z"/>
+                            </svg>
+                        </div>
+                        <h3 class="card-title">Son Teknoloji Makineler</h3>
+                        <p class="card-text">Halılarınız son teknoloji makinalarında halı türüne uygun bitkisel temizlik ürünleri kullanılarak tertemiz bir şekilde yıkanmaktadır.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 20 20">
+                                <path d="M10 3.5a1.5 1.5 0 013 0V4a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-.5a1.5 1.5 0 000 3h.5a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-.5a1.5 1.5 0 00-3 0v.5a1 1 0 01-1 1H6a1 1 0 01-1-1v-3a1 1 0 00-1-1h-.5a1.5 1.5 0 010-3H4a1 1 0 001-1V6a1 1 0 011-1h3a1 1 0 001-1v-.5z"/>
+                            </svg>
+                        </div>
+                        <h3 class="card-title">Bitkisel Temizlik Ürünleri</h3>
+                        <p class="card-text">Halı yıkamadan yatak yıkamaya kadar tüm yıkamalarda doğal temizlik ürünleri kullanılmaktadır. Antibakteriyel ve antialerjik temizlikle tanınır.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 20 20">
+                                <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/>
+                            </svg>
+                        </div>
+                        <h3 class="card-title">Ekonomik ve Kaliteli Hizmet</h3>
+                        <p class="card-text">Mevcut ekonomik koşullar nedeniyle temizlik ihtiyaçlarınızda size ekonomik hizmet vermek için ücretleri en makul şekilde ayarlamaya çalışıyoruz</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 20 20">
+                                <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
+                            </svg>
+                        </div>
+                        <h3 class="card-title">Tecrübeli ve Uzman Personel</h3>
+                        <p class="card-text">Yapılan işin kalitesi, o işi yapanın tecrübesi ve uzmanlığı ile ortaya çıkar. Alanında uzmanlaşmış personelimiz ile hizmetinizdeyiz.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 20 20">
+                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                            </svg>
+                        </div>
+                        <h3 class="card-title">Kurumsal Kalite Anlayışı</h3>
+                        <p class="card-text">Temel hedefimiz kaliteli ve ekonomik hizmetimizle takdirinizi kazanıp uzun yıllar boyunca her geçen gün gelişip büyüyerek yolumuza devam etmektir</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+	<!-- Sube Section -->
+    <section id="sube">
+        <h2 class="section-title">Hizmet Bölgelerimiz</h2>
+		<div class="image-grid">
+			<div class="card service-card">
+                		<div class="card-content">
+                	        	<h3 class="card-title">Boyabat</h3>
+				</div>
+			</div>
+			
+			<div class="card service-card">
+                		<div class="card-content">
+                	        	<h3 class="card-title">Taşköprü</h3>
+				</div>
+			</div>
+		</div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about" class="section section-green">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Azra Halı Yıkama</h2>
+            <p class="section-subtitle">
+                Firmamız sürekli yenilikçi bir anlayış ile daha iyi hizmet nasıl verilir prensibini ilke edinmiştir. İyi hizmet profesyonel ekip ve ekipmanlarla donatılmış halı yıkama fabrikasıdır. Garantili ve yüzde yüz müşteri memnuniyetiyle yaz kış dört mevsim hizmet vermekteyiz.
+            </p>
+
+            <div class="image-grid">
+                <div class="image-grid-item">
+                    <img src="https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?w=400&h=300&fit=crop" alt="Service 1">
+                </div>
+                <div class="image-grid-item">
+                    <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400&h=300&fit=crop" alt="Service 2">
+                </div>
+                <div class="image-grid-item">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop" alt="Service 3">
+                </div>
+                <div class="image-grid-item">
+                    <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?w=400&h=300&fit=crop" alt="Service 4">
+                </div>
+                <div class="image-grid-item">
+                    <img src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?w=400&h=300&fit=crop" alt="Service 5">
+                </div>
+                <div class="image-grid-item">
+                    <img src="https://images.unsplash.com/photo-1540574163026-643ea20ade25?w=400&h=300&fit=crop" alt="Service 6">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section">
+        <div class="container">
+            <h2 class="section-title">Hizmetlerimiz</h2>
+            <p class="section-subtitle section-subtitle-dark">Sözde değil özde temizliğin adresi. Halılarınız ilk günkü gibi tertemiz pırıl pırıl</p>
+
+            <div class="card-grid">
+                <!-- Service 1 -->
+                <div class="card service-card">
+                    <img src="https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?w=400&h=300&fit=crop" alt="Halı Yıkama" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title">Halı Yıkama</h3>
+                        <p class="card-text">Halılarınız son teknoloji makinalarda halı türüne uygun proses uygulanarak bitkisel temizlik ürünleri ile tertemiz yıkanmaktadır. Ücretsiz servisimiz için lütfen arayın.</p>
+                        <button class="btn">Detaylar</button>
+                    </div>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="card service-card">
+                    <img src="https://images.unsplash.com/photo-1540574163026-643ea20ade25?w=400&h=300&fit=crop" alt="Yerinde Koltuk Yıkama" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title">Yerinde Koltuk Yıkama</h3>
+                        <p class="card-text">Yıkamamız yerinde olup koltuk yıkama makinalarımızla profesyonel ekipimizle temizlenir. 4 mevsim yıkama yapmaktayız. Güven ve müşteri memnuniyeti önceliğimizdir.</p>
+                        <button class="btn">Detaylar</button>
+                    </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="card service-card">
+                    <img src="https://images.unsplash.com/photo-1631889993959-41b4e9c6e3c5?w=400&h=300&fit=crop" alt="Stor Perde Yıkama" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title">Stor Perde Yıkama</h3>
+                        <p class="card-text">Perdeleriniz tecrübeli personelimiz tarafından yerinden sökülür tesisimizde tertemiz yıkanır temizlenir kalite ve leke kontrol yapıldıktan sonra tekrar evinize teslim edilir.</p>
+                        <button class="btn">Detaylar</button>
+                    </div>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="card service-card">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop" alt="Yerinde Halı Yıkama" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title">Yerinde Halı Yıkama</h3>
+                        <p class="card-text">Yerinde halı yıkamamız 20 metre ve üzerinde yapılmaktadır genel olarak sökülmesi zor veya yerinden kalkmayan halılarda mükemmel sonuçta yıkama yapıyoruz</p>
+                        <button class="btn">Detaylar</button>
+                    </div>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="card service-card">
+                    <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?w=400&h=300&fit=crop" alt="Yorgan Yıkama" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title">Yorgan Yıkama</h3>
+                        <p class="card-text">Yorgan yıkamamız yün yorgan elyaf yorgan olarak yıkanmaktadır. Son sistem makinalarda hijyenik yüzde yüz bitkisel ilaçlarla tek tek yıkanmaktadır.</p>
+                        <button class="btn">Detaylar</button>
+                    </div>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="card service-card">
+                    <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400&h=300&fit=crop" alt="Battaniye Yıkama" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title">Battaniye Yıkama</h3>
+                        <p class="card-text">Battaniyeleriniz son sistem makinalarımızda hijyenik bir şekilde tertemiz yıkanıp en kısa sürede evinize teslimat yapılmaktadır. Sözde değil özde temizlik.</p>
+                        <button class="btn">Detaylar</button>
+                    </div>
+                </div>
+
+                <!-- Service 7 -->
+                <div class="card service-card">
+                    <img src="https://images.unsplash.com/photo-1631889993959-41b4e9c6e3c5?w=400&h=300&fit=crop" alt="Zebra Perde Yıkama" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title">Zebra Perde Yıkama</h3>
+                        <p class="card-text">Zebra perde yıkamamız özel yıkama ekipmanları ve bitkisel ilaçlarımızla özenle yıkanmaktadır. İyi hizmet kaliteyle olur. En kısa sürede yıkama yapılıp teslimat yapılır.</p>
+                        <button class="btn">Detaylar</button>
+                    </div>
+                </div>
+
+                <!-- Service 8 -->
+                <div class="card service-card">
+                    <img src="https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?w=400&h=300&fit=crop" alt="Overlok" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title">Overlok</h3>
+                        <p class="card-text">Yeni alınmış ya da kenarları yıpranmış halılarınız için yıkama hizmetimizin yanında overlok hizmeti de vermekteyiz. Overlok yaptırmak için ayrıca yorulmayin.</p>
+                        <button class="btn">Detaylar</button>
+                    </div>
+                </div>
+
+                <!-- Service 9 -->
+                <div class="card service-card">
+                    <img src="https://images.unsplash.com/photo-1616486029423-aaa4789e8c9a?w=400&h=300&fit=crop" alt="Halı Tamiri" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title">Halı Tamiri</h3>
+                        <p class="card-text">Eskimiş yıpranmış halılarınız için halı tamiri hizmetimiz vardır. Tecrübeli ustalarımız tarafından halılar yıkama ile birlikte tamir edilip evinize teslim edilmektedir.</p>
+                        <button class="btn">Detaylar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+	
+	<!-- Order Section -->
+    <section id="order" style="padding: 50px 0; background: #f4f6f9;">
+    	<div style="
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        ">
+    	<h2 class="section-title" style="
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 28px;
+            color: #2f2f2f;
+            font-weight: 700;
+        ">Sipariş Formu</h2>
+
+    	<form action="https://formspree.io/f/t" method="POST"style="display: grid; gap: 15px;">
+            <label style="font-weight:600;">Ad Soyad</label>
+            <input type="text" name="name" required style="
+                        padding: 12px;
+                        border: 1px solid #ccc;
+                        border-radius: 8px;
+                        font-size: 15px;
+                   ">
+
+            <label style="font-weight:600;">Telefon</label>
+            <input type="text" name="phone" required style="
+                        padding: 12px;
+                        border: 1px solid #ccc;
+                        border-radius: 8px;
+                        font-size: 15px;
+                   ">
+
+            <label style="font-weight:600;">Adres</label>
+            <textarea name="address" required style="
+                          padding: 12px;
+                          border: 1px solid #ccc;
+                          border-radius: 8px;
+                          font-size: 15px;
+                          min-height: 100px;
+                      "></textarea>
+
+            <label style="font-weight:600;">Hizmet</label>
+            <select name="service" required style="
+                        padding: 12px;
+                        border: 1px solid #ccc;
+                        border-radius: 8px;
+                        font-size: 15px;
+                    ">
+                <option value="Halı Yıkama">Halı Yıkama</option>
+            	<option value="Koltuk Yıkama">Koltuk Yıkama</option>
+            	<option value="Yorgan Yıkama">Yorgan Yıkama</option>
+            </select>
+
+            <button type="submit" style="
+                        margin-top: 10px;
+                        padding: 14px;
+                        background: #1e73be;
+                        color: white;
+                        font-size: 16px;
+                        border: none;
+                        border-radius: 8px;
+                        cursor: pointer;
+                        font-weight: 600;
+                        transition: 0.2s;
+                    "
+                    onmouseover="this.style.background='#155a96'"
+                    onmouseout="this.style.background='#1e73be'"
+>Gönder</button>
+        </form>
+    </section>
+	
+	<!-- Location Section -->
+    <section id="location">
+        <h2 class="section-title">Konum</h2>
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5070.729608118477!2d34.77358830276883!3d41.48476536521116!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4085c3f90df7b679%3A0xacd6fb839bdadfc0!2zQXpyYSBoYWzEsSB5xLFrYW1h!5e0!3m2!1sen!2str!4v1763333891738!5m2!1sen!2str"
+            width="100%"
+            height="400"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="section section-green">
+        <div class="container">
+            <div class="stats-grid">
+                <div>
+                    <svg class="stat-icon" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"/>
+                    </svg>
+                    <div class="stat-number">100</div>
+                    <div class="stat-label">Yıllık Yeni Müşteri</div>
+                </div>
+                <div>
+                    <svg class="stat-icon" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/>
+                    </svg>
+                    <div class="stat-number">1000</div>
+                    <div class="stat-label">Yıllık İş Hacmimiz</div>
+                </div>
+                <div>
+                    <svg class="stat-icon" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
+                    </svg>
+                    <div class="stat-number">900</div>
+                    <div class="stat-label">Mutlu Müşteri Sayısı</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="section-dark">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-title">
+                        <span class="logo-zumrut">Azra</span> <span class="logo-hali">Halı Yıkama</span>
+                    </div>
+                    <p class="footer-text">
+                        Firmamız sürekli yenilikçi bir anlayış ile daha iyi hizmet nasıl verilir prensibini ilke edinmiştir. İyi hizmet kaliteyle olur.
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="footer-title">Faydalı Bilgiler</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Halı Yıkama</a></li>
+                        <li><a href="#">Koltuk Yıkama</a></li>
+                        <li><a href="#">Perde Yıkama</a></li>
+                        <li><a href="#">Yorgan Yıkama</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="footer-title">Bize Ulaşın</h3>
+                    <div class="footer-contact">
+                        <p>📞 0368 315 46 86</p>
+                        <p>💬 0368 315 46 86</p>
+                        <p>📍 Merkez, Bağlıca Yolu, 57200 Alibeyli/Boyabat/Sinop</p>
+                    </div>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/people/Azra-Hal%C4%B1-Y%C4%B1kama-Boyabat/100064742890926/" target="_blank" class="social-icon">f</a>
+                        <a href="https://www.instagram.com/azrahaliyikama57/" target="_blank" class="social-icon">in</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>Copyright © <span id="year"></span>. Azra Halı Yıkama. Tüm Hakları Saklıdır.</p>
+            </div>
+            <script>
+            	document.getElementById('year').textContent = new Date().getFullYear();
+	    </script>
+
+        </div>
+    </footer>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        const totalSlides = slides.length;
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        function goToSlide(n) {
+            showSlide(n);
+        }
+
+        // Auto slide
+        setInterval(nextSlide, 5000);
+    </script>
+</body>
+</html>
+
+

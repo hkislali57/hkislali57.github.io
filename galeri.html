@@ -1,0 +1,703 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azra Halı Yıkama</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #32353d;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            background-color: #b3c53a;
+            color: white;
+            padding: 0.5rem 0;
+            font-size: 0.875rem;
+        }
+
+        .top-bar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-bar-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .top-bar-links a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .top-bar-links a:hover {
+            opacity: 0.8;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            padding: 1rem 0;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .logo {
+            font-size: 1.875rem;
+            font-weight: bold;
+        }
+
+        .logo-zumrut {
+            color: #35a9d9;
+        }
+
+        .logo-hali {
+            color: #b3c53a;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .contact-icon {
+            color: #35a9d9;
+            width: 32px;
+            height: 32px;
+        }
+
+        .contact-label {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .contact-number {
+            font-weight: 600;
+        }
+
+        /* Navigation */
+        nav {
+            border-top: 1px solid #e5e7eb;
+            padding-top: 0.75rem;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #32353d;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: #b3c53a;
+        }
+
+        /* Hero Slider */
+        .hero-slider {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 1s;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.3);
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            color: white;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .slide-text {
+            max-width: 42rem;
+        }
+
+        .slide-title {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .slide-subtitle {
+            font-size: 1.125rem;
+            color: #fde047;
+        }
+
+        .circular-images {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 20;
+        }
+
+        .circular-image {
+            width: 8rem;
+            height: 8rem;
+            border-radius: 50%;
+            border: 4px solid #b3c53a;
+            overflow: hidden;
+            background: white;
+        }
+
+        .circular-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 30;
+            background: rgba(255,255,255,0.8);
+            padding: 0.5rem;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slider-btn:hover {
+            background: white;
+        }
+
+        .slider-btn.prev {
+            left: 1rem;
+        }
+
+        .slider-btn.next {
+            right: 1rem;
+        }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+            z-index: 30;
+        }
+
+        .dot {
+            width: 0.75rem;
+            height: 0.75rem;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.6);
+            border: none;
+            cursor: pointer;
+        }
+
+        .dot.active {
+            background: #b3c53a;
+        }
+
+        /* Sections */
+        .section {
+            padding: 4rem 0;
+        }
+
+        .section-gray {
+            background: #f9fafb;
+        }
+
+        .section-green {
+            background: #b3c53a;
+        }
+
+        .section-dark {
+            background: #32353d;
+            color: white;
+        }
+
+        .card {
+            background: white;
+            border-radius: 0.75rem;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: box-shadow 0.3s;
+        }
+
+        .card:hover {
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-icon {
+            width: 4rem;
+            height: 4rem;
+            background: #35a9d9;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .card-icon svg {
+            width: 2rem;
+            height: 2rem;
+            fill: white;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-text {
+            color: #6b7280;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 12rem;
+            object-fit: cover;
+        }
+
+        .service-card .card-content {
+            text-align: center;
+        }
+
+        .service-card .card-title {
+            margin-bottom: 0.75rem;
+        }
+
+        .service-card .card-text {
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Button */
+        .btn {
+            background: #35a9d9;
+            color: white;
+            padding: 0.5rem 2rem;
+            border: none;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background: #2a8ab8;
+        }
+
+        /* Section Title */
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: white;
+            max-width: 56rem;
+            margin: 0 auto 3rem;
+        }
+
+        .section-subtitle-dark {
+            color: #6b7280;
+        }
+
+        .stat-icon {
+            width: 3rem;
+            height: 3rem;
+            margin: 0 auto 1rem;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.125rem;
+        }
+        
+        .gallery-grid {
+            width: 90%;
+            max-width: 1200px;
+            margin: 2rem auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .gallery-grid img,
+        .gallery-grid video {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 6px;
+            background: #eee;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 3rem 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .footer-text {
+            color: #9ca3af;
+            font-size: 0.875rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 0.875rem;
+        }
+
+        .footer-links a:hover {
+            color: #b3c53a;
+        }
+
+        .footer-contact {
+            color: #9ca3af;
+            font-size: 0.875rem;
+        }
+
+        .footer-contact p {
+            margin-bottom: 0.5rem;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .social-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            background: #4a4d56;
+            border-radius: 0.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            background: #b3c53a;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #4b5563;
+            padding-top: 2rem;
+            text-align: center;
+            color: #9ca3af;
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-top {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .slide-title {
+                font-size: 2rem;
+            }
+
+            .circular-images {
+                gap: 0.5rem;
+            }
+
+            .circular-image {
+                width: 5rem;
+                height: 5rem;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 1.875rem;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <div>Azra Halı Yıkama</div>
+                <div class="top-bar-links">
+                    <a href="https://www.facebook.com/people/Azra-Hal%C4%B1-Y%C4%B1kama-Boyabat/100064742890926/" target="_blank">Facebook</a>
+                    <a href="https://www.instagram.com/azrahaliyikama57/" target="_blank">Instagram</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="header-top">
+                    <div class="logo">
+                        <span class="logo-zumrut">Azra</span> <span class="logo-hali">Halı Yıkama</span>
+                    </div>
+
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <svg class="contact-icon" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+                            </svg>
+                            <div>
+                                <div class="contact-label">Telefon</div>
+                                <div class="contact-number">0368 315 46 86</div>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <svg class="contact-icon" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd"/>
+                            </svg>
+                            <div>
+                                <div class="contact-label">Whatsapp</div>
+                                <div class="contact-number">0368 315 46 86</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <nav>
+                    <ul>
+                        <li><a href="index.html">ANA SAYFA</a></li>
+                        <li><a href="index.html#about">FİRMAMIZ HAKKINDA</a></li>
+                        <li><a href="index.html#services">HİZMETLERİMİZ</a></li>
+                        <li><a href="index.html#sube">HİZMET BÖLGELERİMİZ</a>
+                        <li><a href="fotogaleri.html">FOTOGALER</a></li>
+                        <li><a href="index.html#location">KONUM</a></li>
+                        <li><a href="index.html#contact">İLETİŞİM</a></li>
+                        <li><a href="index.html#order" style="background:#28a745; color:white; padding:10px 16px; border-radius:6px;">SİPARİŞ VER</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+	<div class="gallery-grid">
+
+    	    <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80" alt="">
+	    <img src="https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?w=400&h=300&fit=crop&w=800&q=80" alt="">
+	    <img src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?w=400&h=300&fit=crop&w=800&q=80" alt="">
+	
+	
+	    <video controls>
+	        <source src="https://samplelib.com/lib/preview/mp4/sample-5s.mp4" 	type="video/mp4">
+	    </video>
+
+	    <video controls>
+	        <source src="https://samplelib.com/lib/preview/mp4/sample-10s.mp4" type="video/mp4">
+	    </video>
+
+	</div>
+    <!-- Footer -->
+    <footer id="contact" class="section-dark">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-title">
+                        <span class="logo-zumrut">Azra</span> <span class="logo-hali">Halı Yıkama</span>
+                    </div>
+                    <p class="footer-text">
+                        Firmamız sürekli yenilikçi bir anlayış ile daha iyi hizmet nasıl verilir prensibini ilke edinmiştir. İyi hizmet kaliteyle olur.
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="footer-title">Faydalı Bilgiler</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Halı Yıkama</a></li>
+                        <li><a href="#">Koltuk Yıkama</a></li>
+                        <li><a href="#">Perde Yıkama</a></li>
+                        <li><a href="#">Yorgan Yıkama</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="footer-title">Bize Ulaşın</h3>
+                    <div class="footer-contact">
+                        <p>📞 0368 315 46 86</p>
+                        <p>💬 0368 315 46 86</p>
+                        <p>📍 Merkez, Bağlıca Yolu, 57200 Alibeyli/Boyabat/Sinop</p>
+                    </div>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/people/Azra-Hal%C4%B1-Y%C4%B1kama-Boyabat/100064742890926/" target="_blank" class="social-icon">f</a>
+                        <a href="https://www.instagram.com/azrahaliyikama57/" target="_blank" class="social-icon">in</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>Copyright © <span id="year"></span>. Azra Halı Yıkama. Tüm Hakları Saklıdır.</p>
+            </div>
+            <script>
+            	document.getElementById('year').textContent = new Date().getFullYear();
+	    </script>
+
+        </div>
+    </footer>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        const totalSlides = slides.length;
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        function goToSlide(n) {
+            showSlide(n);
+        }
+
+        // Auto slide
+        setInterval(nextSlide, 5000);
+    </script>
+</body>
+</html>
+
